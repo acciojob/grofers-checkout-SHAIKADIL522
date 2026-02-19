@@ -3,15 +3,16 @@ getSumBtn.append("Get Total Price");
 document.body.appendChild(getSumBtn);
 
 const getSum = () => {
-  // select all price cells
   const prices = document.querySelectorAll(".prices");
   let sum = 0;
 
   prices.forEach(price => {
-    sum += Number(price.textContent);
+    const match = price.textContent.match(/\d+$/);
+    if (match) {
+      sum += Number(match[0]);
+    }
   });
 
-  // check if answer cell already exists
   let ans = document.getElementById("ans");
 
   if (!ans) {
@@ -30,5 +31,6 @@ const getSum = () => {
 };
 
 getSumBtn.addEventListener("click", getSum);
+
 
 
