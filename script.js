@@ -1,8 +1,9 @@
 const getSumBtn = document.createElement("button");
-getSumBtn.innerText = "Get Total Price";
+getSumBtn.append("Get Total Price");
 document.body.appendChild(getSumBtn);
 
-getSumBtn.addEventListener("click", () => {
+const getSum = () => {
+  // select all price cells
   const prices = document.querySelectorAll(".prices");
   let sum = 0;
 
@@ -10,16 +11,24 @@ getSumBtn.addEventListener("click", () => {
     sum += Number(price.textContent);
   });
 
-  const table = document.querySelector("table");
-  const row = document.createElement("tr");
-  const cell = document.createElement("td");
+  // check if answer cell already exists
+  let ans = document.getElementById("ans");
 
-  cell.id = "ans";
-  cell.colSpan = 2;
-  cell.innerText = sum;
+  if (!ans) {
+    const table = document.querySelector("table");
+    const row = document.createElement("tr");
+    ans = document.createElement("td");
 
-  row.appendChild(cell);
-  table.appendChild(row);
-});
+    ans.id = "ans";
+    ans.colSpan = 2;
+
+    row.appendChild(ans);
+    table.appendChild(row);
+  }
+
+  ans.textContent = sum;
+};
+
+getSumBtn.addEventListener("click", getSum);
 
 
